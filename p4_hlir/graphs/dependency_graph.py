@@ -64,7 +64,7 @@ class Edge:
         else:
             assert(False)
         self.dep = dep
-        
+
 class Graph:
     def __init__(self, name):
         self.name = name
@@ -203,6 +203,7 @@ class Graph:
                           " [" + styles[edge.type_] +\
                           " " + edge_label + "]" + ";\n")
         out.write("}\n")
+
 
 def _graph_get_or_add_node(graph, p4_node):
     node = graph.get_node(p4_node.name)
