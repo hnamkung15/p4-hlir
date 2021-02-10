@@ -518,10 +518,13 @@ class rmt_table_graph():
                 else:
                     edge_label = ""
                 if dependency.type_ == Dependency.SUCCESSOR:
-                    if dependency.to.conditional_barrier[1] == False:
-                        edge_label += " arrowhead = diamond"
-                    else:
-                        edge_label += " arrowhead = dot"
+                    #Hun added
+                    # print(len(dependency.to.conditional_barrier))
+                        # if dependency.to.conditional_barrier[1] == False:
+                        #     edge_label += " arrowhead = diamond"
+                        # else:
+                        #     edge_label += " arrowhead = dot"
+                    edge_label += " arrowhead = diamond"
                 out.write(table.name + " -> " + dependency.to.name +\
                           " [" + styles[dependency.type_] +\
                           " " + edge_label + "]" + ";\n")
@@ -565,11 +568,12 @@ class rmt_table_graph():
                     edge_label += " decorate=true"
                 else:
                     edge_label = ""
-                if dependency.type_ == Dependency.SUCCESSOR:
-                    if dependency.to.conditional_barrier[1] == False:
-                        edge_label += " arrowhead = diamond"
-                    else:
-                        edge_label += " arrowhead = dot"
+                    # print(len(dependency.to.conditional_barrier))
+                    # if dependency.to.conditional_barrier[1] == False:
+                    #     edge_label += " arrowhead = diamond"
+                    # else:
+                    #     edge_label += " arrowhead = dot"
+                    edge_label += " arrowhead = diamond"
                 if dependency.type_ != Dependency.CONTROL_FLOW:
                     out.write(table.name + " -> " + dependency.to.name +\
                               " [" + styles[dependency.type_] +\

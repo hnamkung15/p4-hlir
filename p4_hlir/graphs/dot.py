@@ -226,6 +226,26 @@ def export_table_dependency_graph(hlir, filebase, gen_dir, show_conds = False):
 
     print
 
+def export_table_dependency_graph_without_cf(hlir, filebase, gen_dir, show_conds = False):
+    print
+    print "TABLE DEPENDENCIES..."
+
+    print
+    print "INGRESS PIPELINE"
+
+    filename_dot = os.path.join(gen_dir, filebase + ".ingress.tables_dep_without_cf.dot")
+    # graph = dependency_graph.build_table_graph_ingress(hlir)
+    graph = dependency_graph.build_table_graph_ingress_without_cf(hlir)
+    min_stages = graph.count_min_stages(show_conds = show_conds)
+    print "pipeline ingress requires at least", min_stages, "stages"
+    with open(filename_dot, 'w') as dotf:
+        graph.generate_dot(out = dotf)
+
+    generate_graph(filename_dot,
+                   os.path.join(gen_dir, filebase + ".ingress.tables_dep_without_cf"))
+
+
+
 def export_table_dependency_graph_rmt(hlir, filebase, gen_dir, show_conds = False):
     print
     print "TABLE DEPENDENCIES..."

@@ -44,6 +44,11 @@ def get_parser():
                         help="generate table dependency graph")
 
     # hun added
+    parser.add_argument('--deps-without-cf-dep',
+                        dest='graphs', action='append_const', const="deps-without-cf-dep",
+                        help="generate table dependency graph without control flow dependency")
+
+    # hun added
     parser.add_argument('--rmt',
                         dest='graphs', action='append_const', const="rmt",
                         help="generate rmt table dependency graph")
@@ -137,8 +142,11 @@ def main():
     if "table" in graphs_to_generate:
         dot.export_table_graph(h, basename, gen_dir, predecessors=args.table_predecessors)
     if "deps" in graphs_to_generate:
-        print("generate dependency graph")
         dot.export_table_dependency_graph(h, basename, gen_dir,
+                                          show_conds = args.dep_stages_with_conds)
+
+    if "deps-without-cf-dep" in graphs_to_generate:
+        dot.export_table_dependency_graph_without_cf(h, basename, gen_dir,
                                           show_conds = args.dep_stages_with_conds)
 
     if "rmt" in graphs_to_generate:
